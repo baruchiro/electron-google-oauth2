@@ -1,18 +1,19 @@
 {
-  "name": "@getstation/electron-google-oauth2",
+  "name": "electron-google-oauth2",
   "version": "2.1.0",
   "description": "A Google OAuth2 module for your Electron app.",
   "license": "MIT",
-  "repository": "getstation/electron-google-oauth2",
+  "repository": "baruchiro/electron-google-oauth2",
   "main": "./lib/index",
   "types": "./lib/index",
   "author": {
-    "name": "Joël Charles",
-    "email": "joel@getstation.com"
+    "name": "Baruch Odem",
+    "email": "baruchiro@gmail.com"
   },
   "scripts": {
     "build": "tsc -p .",
-    "prepublishOnly": "yarn run build"
+    "prepublishOnly": "yarn run build",
+    "release": "semantic-release"
   },
   "keywords": [
     "electron",
@@ -21,7 +22,12 @@
     "access token"
   ],
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "conventional-changelog-eslint": "^3.0.9",
     "electron": "^7.1.11",
+    "semantic-release": "^19.0.5",
     "typescript": "^3.7.5"
   },
   "dependencies": {
@@ -31,7 +37,7 @@
     "node": ">= 8.0"
   },
   "bugs": {
-    "url": "https://github.com/getstation/electron-google-oauth2/issues"
+    "url": "https://github.com/baruchiro/electron-google-oauth2/issues"
   },
-  "homepage": "https://github.com/getstation/electron-google-oauth2#readme"
+  "homepage": "https://github.com/baruchiro/electron-google-oauth2#readme"
 }
