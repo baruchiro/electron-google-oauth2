@@ -1,14 +1,14 @@
 {
-  "name": "@getstation/electron-google-oauth2",
+  "name": "@baruchiro/electron-google-oauth2",
   "version": "2.1.0",
   "description": "A Google OAuth2 module for your Electron app.",
   "license": "MIT",
-  "repository": "getstation/electron-google-oauth2",
+  "repository": "baruchiro/electron-google-oauth2",
   "main": "./lib/index",
   "types": "./lib/index",
   "author": {
-    "name": "Joël Charles",
-    "email": "joel@getstation.com"
+    "name": "Baruch Odem",
+    "email": "baruchiro@gmail.com"
   },
   "scripts": {
     "build": "tsc -p .",
@@ -32,7 +32,7 @@
     "node": ">= 8.0"
   },
   "bugs": {
-    "url": "https://github.com/getstation/electron-google-oauth2/issues"
+    "url": "https://github.com/baruchiro/electron-google-oauth2/issues"
   },
-  "homepage": "https://github.com/getstation/electron-google-oauth2#readme"
+  "homepage": "https://github.com/baruchiro/electron-google-oauth2#readme"
 }
