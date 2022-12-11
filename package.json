@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "prepublishOnly": "yarn run build"
+    "prepublishOnly": "yarn run build",
+    "release": "semantic-release"
   },
   "keywords": [
     "electron",
@@ -21,6 +22,10 @@
     "access token"
   ],
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "conventional-changelog-eslint": "^3.0.9",
     "electron": "^7.1.11",
     "semantic-release": "^19.0.5",
     "typescript": "^3.7.5"
