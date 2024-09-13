@@ -1,5 +1,12 @@
 # Changelog
 
+# [3.1.0](https://github.com/baruchiro/electron-google-oauth2/compare/v3.0.0...v3.1.0) (2024-09-13)
+
+
+### Update
+
+* sync with getstation (#4) ([db32aa8](https://github.com/baruchiro/electron-google-oauth2/commit/db32aa800124c8f4a0409104d2f491597111d865)), closes [#4](https://github.com/baruchiro/electron-google-oauth2/issues/4) [#1](https://github.com/baruchiro/electron-google-oauth2/issues/1)
+
 # [3.0.0](https://github.com/baruchiro/electron-google-oauth2/compare/v2.1.0...v3.0.0) (2022-12-11)
 
 
