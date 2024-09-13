@@ -1,14 +1,13 @@
 // inspired by https://github.com/parro-it/electron-google-oauth
 import { BrowserWindow, shell } from 'electron';
 import { EventEmitter } from 'events';
-import { OAuth2Client } from 'google-auth-library';
+import { GenerateAuthUrlOpts, OAuth2Client } from 'google-auth-library';
 import { Credentials } from 'google-auth-library/build/src/auth/credentials';
 import { stringify } from 'querystring';
 import * as url from 'url';
 import LoopbackRedirectServer from './LoopbackRedirectServer';
 
-const BW: typeof BrowserWindow = process.type === 'renderer' ?
-  require('@electron/remote').BrowserWindow : BrowserWindow;
+const BW: typeof BrowserWindow = process.type === 'renderer' ? require('@electron/remote').BrowserWindow : BrowserWindow;
 
 export class UserClosedWindowError extends Error {
   constructor() {
@@ -30,7 +29,7 @@ export type ElectronGoogleOAuth2Options = {
 };
 
 export const defaultElectronGoogleOAuth2Options: ElectronGoogleOAuth2Options = {
-  successRedirectURL: 'https://getstation.com/app-login-success/',
+  successRedirectURL: 'https://127.0.0.1/',
   // can't be randomized
   loopbackInterfaceRedirectionPort: 42813,
   refocusAfterSuccess: true,
@@ -45,6 +44,14 @@ class ElectronGoogleOAuth2 extends EventEmitter {
 
   public oauth2Client: OAuth2Client;
   public scopes: string[];
+
+  /**
+   * Google GenerateAuthUrlOpts prompt fields.
+   *
+   * @link https://googleapis.dev/nodejs/google-auth-library/5.5.0/interfaces/GenerateAuthUrlOpts.html#prompt
+   */
+  public prompt: string[];
+
   protected server: LoopbackRedirectServer | null;
   protected options: ElectronGoogleOAuth2Options;
 
@@ -67,6 +74,7 @@ class ElectronGoogleOAuth2 extends EventEmitter {
     if (!scopes.includes('email')) scopes.push('email');
     this.scopes = scopes;
     this.options = { ...defaultElectronGoogleOAuth2Options, ...options };
+    this.prompt = [];
     this.oauth2Client = new OAuth2Client(
       clientId,
       clientSecret,
@@ -83,11 +91,17 @@ class ElectronGoogleOAuth2 extends EventEmitter {
    * @returns {string}
    */
   generateAuthUrl(forceAddSession: boolean = false) {
-    let url = this.oauth2Client.generateAuthUrl({
+    let opts: GenerateAuthUrlOpts = {
       access_type: 'offline', // 'online' (default) or 'offline' (gets refresh_token)
       scope: this.scopes,
-      redirect_uri: `http://127.0.0.1:${this.options.loopbackInterfaceRedirectionPort}/callback`
-    });
+      redirect_uri: `http://127.0.0.1:${this.options.loopbackInterfaceRedirectionPort}/callback`,
+    }
+
+    if (this.prompt.length != 0) {
+      opts.prompt = this.prompt.join(" ");
+    }
+
+    let url = this.oauth2Client.generateAuthUrl(opts);
 
     if (forceAddSession) {
       const qs = stringify({ continue: url });
@@ -171,6 +185,16 @@ class ElectronGoogleOAuth2 extends EventEmitter {
 
   setTokens(tokens: Credentials) {
     this.oauth2Client.setCredentials(tokens);
+  }
+
+  /**
+   * Ensure that the server has been closed.
+   */
+  async dispose() {
+    if (this.server) {
+      await this.server.close();
+      this.server = null;
+    }
   }
 }
 
