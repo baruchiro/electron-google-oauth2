@@ -1,22 +1,14 @@
 # Changelog
-All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+# [3.0.0](https://github.com/baruchiro/electron-google-oauth2/compare/v2.1.0...v3.0.0) (2022-12-11)
 
-## [Unreleased]
 
-## [3.0.0] - 2022-06-16
-### Fixed
-- The `remote` module has been removed in Electron 14 (#1).
+### Breaking
 
-## [2.1.0] - 2020-02-04
-### Changed
-- Upgrade all dependencies
+* Use @electron/remote (#1) ([95a8d21](https://github.com/baruchiro/electron-google-oauth2/commit/95a8d2149c866704bea870f33b545c249b43fac9)), closes [#1](https://github.com/baruchiro/electron-google-oauth2/issues/1) [#42](https://github.com/baruchiro/electron-google-oauth2/issues/42)
 
-### Fixed
-- Bundle TS helpers
+First version from @baruchiro.
 
-## [1.0.0] - 2018-05-14
-### Changed
-- Typescript version
+# 2.1.0 (2022-12-11)
+
+Dummy release. DO NOT USE
